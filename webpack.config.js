@@ -1,7 +1,11 @@
 const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const HtmlPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
 
-module.exports = {
+const isDEV = process.env.NODE_ENV === 'development'
+
+const config = {
     mode: 'development',
     entry: path.join(__dirname,'src/index.js'),
     output: {
@@ -41,6 +45,31 @@ module.exports = {
         ]
     },
     plugins: [
-        new VueLoaderPlugin()
+        new VueLoaderPlugin(),
+        new HtmlPlugin(),
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: isDEV ? '"development"' : '"production"'
+            }
+        })
     ]
 }
+
+if (isDEV) {
+    config.devtool = '#cheap-module-eval-source-map'
+    config.devServer = {
+        port: 8000,
+        host: '0.0.0.0', //win10直接访问0.0.0.0是不行的，要访问本机ip
+        overlay: {
+            error: true
+        },
+        open: true,
+        hot: true
+    },
+    config.plugins.push(
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoEmitOnErrorsPlugin()
+    )
+}
+
+module.exports = config;

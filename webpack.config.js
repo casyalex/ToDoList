@@ -73,7 +73,6 @@ if (isDEV) {
         overlay: {
             error: true
         },
-        open: true,
         hot: true
     },
     config.plugins.push(

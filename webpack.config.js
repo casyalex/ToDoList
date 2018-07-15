@@ -74,6 +74,10 @@ if (isDEV) {
             new webpack.NoEmitOnErrorsPlugin()
         )
 } else {
+    config.entry = {
+        app: path.join(__dirname, 'src/index.js'),
+        vendor: ['vue']
+    }
     config.output.filename = '[name].[chunkhash:8].js'
     config.module.rules.push({
         test: /\.styl/,
@@ -90,9 +94,17 @@ if (isDEV) {
                 'stylus-loader'
             ]
         })
-    })
+    }),
+    config.optimization = {
+        splitChunks: {
+            name: 'vendor',
+        },
+        runtimeChunk: {
+            name: 'runtime'
+        }
+    }
     config.plugins.push(
-        new ExtractPlugin('style.[hash:8].css')
+        new ExtractPlugin('style.[hash:8].css'),
     )
 }
 

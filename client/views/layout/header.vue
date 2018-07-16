@@ -1,7 +1,7 @@
 <template>
     <header class="main-header">
         <h1>
-            RbTodo
+            RbTodo2
         </h1>
     </header>
 </template>

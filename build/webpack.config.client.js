@@ -35,17 +35,42 @@ if (isDEV) {
     module: {
       rules: [{
         test: /\.styl/,
-        use: [
-          'vue-style-loader',
-          'css-loader',
+        oneOf: [
           {
-            loader: 'postcss-loader',
-            options: {
-              sourceMap: true
-            }
+            resourceQuery: /module/,
+            use: [
+              'vue-style-loader',
+              {
+                loader: 'css-loader',
+                options: {
+                  modules: true,
+                  localIdentName: '[path]-[name]-[hash:base64:5]',
+                  camelCase: true
+                }
+              },
+              {
+                loader: 'postcss-loader',
+                options: {
+                  sourceMap: true,
+                }
+              },
+              'stylus-loader'
+            ]
           },
-          'stylus-loader'
-        ]
+          {
+            use: [
+              'vue-style-loader',
+              'css-loader',
+              {
+                loader: 'postcss-loader',
+                options: {
+                  sourceMap: true,
+                }
+              },
+              'stylus-loader'
+            ]
+          }
+        ],
       }]
     },
     devServer,
@@ -68,19 +93,43 @@ if (isDEV) {
       rules: [
         {
           test: /\.styl/,
-          use: ExtractPlugin.extract({
-            fallback: 'vue-style-loader',
-            use: [
-              'css-loader',
-              {
-                loader: 'postcss-loader',
-                options: {
-                  sourceMap: true
-                }
-              },
-              'stylus-loader'
-            ]
-          })
+          oneOf: [
+            {
+              resourceQuery: /module/,
+              use: ExtractPlugin.extract({
+                fallback: 'vue-style-loader',
+                use: [{
+                  loader: 'css-loader',
+                  options: {
+                    modules: true,
+                    localIdentName: '[hash:base64:5]',
+                    camelCase: true
+                  }
+                },
+                {
+                  loader: 'postcss-loader',
+                  options: {
+                    sourceMap: true,
+                  }
+                },
+                  'stylus-loader'
+                ]
+              })
+            },
+            {use: ExtractPlugin.extract({
+              fallback: 'vue-style-loader',
+              use: [
+                'css-loader',
+                {
+                  loader: 'postcss-loader',
+                  options: {
+                    sourceMap: true
+                  }
+                },
+                'stylus-loader'
+              ]
+            })}
+          ],
         }
       ]
     },

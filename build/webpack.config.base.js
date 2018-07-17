@@ -4,7 +4,8 @@ const creatVueLoaderOptions = require('./vue-loader.config')
 const isDEV = process.env.NODE_ENV === 'development'
 
 const config = {
-  mode: 'development',
+  mode: process.env.NODE_ENV || 'production', // develpoment || production
+  target: 'web',
   entry: path.join(__dirname, '../client/index.js'),
   output: {
     filename: 'bundle.[hash:8].js',

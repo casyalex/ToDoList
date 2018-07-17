@@ -65,7 +65,7 @@ eslint全家桶，神特么才记得住哦！
   ]
 ```
 
-再装上editorconfig插件,自动保存
+再装上editorconfig插件(这个是VScode编辑器插件,webstorm会自带),自动保存
 
 根目录新建.editorconfg 文件，业界通用基本配置如下：
 

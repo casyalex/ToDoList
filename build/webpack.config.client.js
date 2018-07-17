@@ -75,15 +75,12 @@ if (isDEV) {
     devServer,
     plugins: defalutPlugins.concat([
       new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoEmitOnErrorsPlugin()
     ])
   })
 } else {
   config = merge(baseConfig, {
-    mode: 'production',
     entry: {
       app: path.join(__dirname, '../client/index.js'),
-      vendor: ['vue']
     },
     output: {
       filename: '[name].[chunkhash:8].js'
@@ -134,11 +131,9 @@ if (isDEV) {
     },
     optimization: {
       splitChunks: {
-        name: 'vendor'
+        chunks: 'all'
       },
-      runtimeChunk: {
-        name: 'runtime'
-      }
+      runtimeChunk: true
     },
     plugins: defalutPlugins.concat([new ExtractPlugin('style.[hash:8].css')])
   })

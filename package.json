@@ -10,11 +10,11 @@
     "clean": "rimraf dist",
     "lint": "eslint --ext .js --ext .jsx --ext .vue client/ build/",
     "lint-fix": "eslint --fix --ext .js --ext .jsx --ext .vue client/ build/",
-    "precommit": "npm run lint-fix",
+    "precommit": "lint-staged",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js"
   },
   "lint-staged": {
-    "{build,client}/**/*.{js,jsx}": ["lint-fix", "git add"]
+    "{build,client}/**/*.{js,jsx}": ["npm run lint-fix", "git add"]
   },
   "repository": {
     "type": "git",

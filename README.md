@@ -32,6 +32,15 @@ eslint全家桶，神特么才记得住哦！
 新建.elintrc，配置规范，"extends":"standard" 使用standard标准
 
 同时需要添加Plugin: ["html"]
+```javascript
+{
+    "extends": "standard",
+    "plugins": [
+        "html"
+    ],
+    "parser": "babel-eslint"  //这一项为eslint 实时编译需要的语法模块
+}
+```
 最后package.json 加上命令：
 
 1. "lint": "eslint --ext .js --ext .jsx --ext .vue client/",

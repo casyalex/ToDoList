@@ -84,3 +84,28 @@ eslint全家桶，神特么才记得住哦！
 安装 husky ，添加precommit钩子，确保提交代码都符合eslint标准,经过eslint自动修复
 1. npm i husky -D
 2. package.json 增加 "precommit": "npm run lint-fix"
+
+#### 自己补充的知识 husky还应该配合lint-staged使用
+
+单单使用husky，eslint修改的文件并不会commit，而会作为新的更改保存下来，直到下一次git add/git commit才会提交上去
+
+这时候就需要lint-staged。staged 是 Git 里面的概念，指待提交区，使用 git commit -a，或者先 git add 然后 git commit 的时候，你的修改代码都会经过待提交区。在这个节点运行eslint，这样commit上去就会是完好的代码。
+
+安装
+```javascipt
+npm install -D lint-staged
+```
+
+然后，修改 package.json 配置：
+```javascipt
+{
+  "scripts": {
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "{build,client}/**/*.{js,jsx}": ["npm run lint-fix", "git add"]
+  }
+}
+```
+
+收工~这样只要你 add 的js或者jsx（具体看你的规则），提交都会自动lint修正好

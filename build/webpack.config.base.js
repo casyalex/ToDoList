@@ -11,32 +11,39 @@ const config = {
     path: path.join(__dirname, '../dist')
   },
   module: {
-    rules: [{
-      test: /\.vue$/,
-      use: [{
-        loader: 'vue-loader',
-        options: creatVueLoaderOptions(isDEV)
-      }]
-    },
-    {
-      test: /\.jsx$/,
-      use: 'babel-loader'
-    },
-    {
-      test: /\.js$/,
-      use: 'babel-loader',
-      exclude: /node_modules/
-    },
-    {
-      test: /\.(gif|jpg|jpeg|png|svg)$/,
-      use: [{
-        loader: 'url-loader',
-        options: {
-          limit: 102400,
-          name: 'resources/[path][name]-[hash:8].[ext]'
-        }
-      }]
-    }
+    rules: [
+      {
+        test: /\.(vue|js|jsx)$/,
+        loader: 'eslint-loader',
+        exclude: /node_modules/,
+        enforce: 'pre'
+      },
+      {
+        test: /\.vue$/,
+        use: [{
+          loader: 'vue-loader',
+          options: creatVueLoaderOptions(isDEV)
+        }]
+      },
+      {
+        test: /\.jsx$/,
+        use: 'babel-loader'
+      },
+      {
+        test: /\.js$/,
+        use: 'babel-loader',
+        exclude: /node_modules/
+      },
+      {
+        test: /\.(gif|jpg|jpeg|png|svg)$/,
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 102400,
+            name: 'resources/[path][name]-[hash:8].[ext]'
+          }
+        }]
+      }
     ]
   }
 }

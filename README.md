@@ -21,10 +21,10 @@ eslint全家桶，神特么才记得住哦！
 
 要在npm装这一堆
 
-1. eslint 
-2. eslint-config-standard 
-3. eslint-plugin-standard 
-4. eslint-plugin-promise 
+1. eslint
+2. eslint-config-standard
+3. eslint-plugin-standard
+4. eslint-plugin-promise
 5. eslint-plugin-import
 6. eslint-plugin-node
 7. eslint-plugin-html
@@ -36,3 +36,36 @@ eslint全家桶，神特么才记得住哦！
 
 1. "lint": "eslint --ext .js --ext .jsx --ext .vue client/",    //--ext 跟检测文件类型 最后一项是检测的目录
 2. "lint-fix": "eslint --fix --ext .js --ext .jsx --ext .vue client/",  //--fix 由eslint自动修复
+
+如果要实时编译都加载eslint检查，需要这么做
+
+1. 安装npm i eslint-loader babel-eslint
+2. .eslintrc里配置 "parser": "babel-eslint"
+3. webpack.config.base.js 配置rules，test里匹配所有需要检测的类型，loader加载eslint-loader，enforce设置为'pre'
+
+```javascript
+  rules:[
+    {
+      test: /\.(vue|js|jsx)$/,
+      loader: 'eslint-loader',
+      exclude: /node_modules/,
+      enforce: 'pre'
+    }
+  ]
+```
+
+再装上editorconfig插件，就更完美了
+
+根目录新建.editorconfg 文件，业界通用基本配置如下：
+
+```javascript
+  root = true
+
+  [*]
+  charset = utf-8
+  end_of_line = lf
+  indent_size = 2
+  indent_style = space
+  insert_final_newline = true
+  trim_trailing_whitespace = true
+```

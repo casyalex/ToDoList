@@ -74,13 +74,13 @@ if (isDEV) {
     },
     devServer,
     plugins: defalutPlugins.concat([
-      new webpack.HotModuleReplacementPlugin(),
+      new webpack.HotModuleReplacementPlugin()
     ])
   })
 } else {
   config = merge(baseConfig, {
     entry: {
-      app: path.join(__dirname, '../client/index.js'),
+      app: path.join(__dirname, '../client/index.js')
     },
     output: {
       filename: '[name].[chunkhash:8].js'

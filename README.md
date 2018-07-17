@@ -29,13 +29,15 @@ eslint全家桶，神特么才记得住哦！
 6. eslint-plugin-node
 7. eslint-plugin-html
 
-新建.elintrc，配置规范，"extends":"standard" 一般就可以
+新建.elintrc，配置规范，"extends":"standard" 使用standard标准
 
-再添个Plugin: ["html"] 就没问题
+同时需要添加Plugin: ["html"]
 最后package.json 加上命令：
 
-1. "lint": "eslint --ext .js --ext .jsx --ext .vue client/",    //--ext 跟检测文件类型 最后一项是检测的目录
-2. "lint-fix": "eslint --fix --ext .js --ext .jsx --ext .vue client/",  //--fix 由eslint自动修复
+1. "lint": "eslint --ext .js --ext .jsx --ext .vue client/",
+// --ext 跟检测文件类型 最后一项是检测的目录
+2. "lint-fix": "eslint --fix --ext .js --ext .jsx --ext .vue client/",
+// --fix 由eslint自动修复
 
 如果要实时编译都加载eslint检查，需要这么做
 
@@ -54,7 +56,7 @@ eslint全家桶，神特么才记得住哦！
   ]
 ```
 
-再装上editorconfig插件，就更完美了
+再装上editorconfig插件,自动保存
 
 根目录新建.editorconfg 文件，业界通用基本配置如下：
 
@@ -69,3 +71,7 @@ eslint全家桶，神特么才记得住哦！
   insert_final_newline = true
   trim_trailing_whitespace = true
 ```
+
+安装 husky ，添加precommit钩子，确保提交代码都符合eslint标准,经过eslint自动修复
+1. npm i husky -D
+2. package.json 增加 "precommit": "npm run lint-fix"

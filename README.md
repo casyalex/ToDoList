@@ -119,7 +119,8 @@ npm install -D lint-staged
 (found in <Root>)
 ```
 
-那就是引入的是vue runtime only的版本，在resolve下设置alias别名vue，指向vue.esm.js即可
+那就是引入的是vue runtime only的版本，这个版本不支持template的解析，所以会报warning。
+解决版本：在resolve下设置alias别名vue，指向vue.esm.js即可
 
 ```javascript
 resolve: {

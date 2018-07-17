@@ -19,13 +19,12 @@ const defalutPlugins = [
 
 const devServer = {
   port: 8000,
-  host: '0.0.0.0', //win10直接访问0.0.0.0是不行的，要访问本机ip
+  host: '0.0.0.0', // win10直接访问0.0.0.0是不行的，要访问本机ip
   overlay: {
     error: true
   },
   hot: true
 }
-
 
 let config
 
@@ -51,7 +50,7 @@ if (isDEV) {
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: true,
+                  sourceMap: true
                 }
               },
               'stylus-loader'
@@ -64,13 +63,13 @@ if (isDEV) {
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: true,
+                  sourceMap: true
                 }
               },
               'stylus-loader'
             ]
           }
-        ],
+        ]
       }]
     },
     devServer,
@@ -109,10 +108,10 @@ if (isDEV) {
                 {
                   loader: 'postcss-loader',
                   options: {
-                    sourceMap: true,
+                    sourceMap: true
                   }
                 },
-                  'stylus-loader'
+                'stylus-loader'
                 ]
               })
             },
@@ -129,13 +128,13 @@ if (isDEV) {
                 'stylus-loader'
               ]
             })}
-          ],
+          ]
         }
       ]
     },
     optimization: {
       splitChunks: {
-        name: 'vendor',
+        name: 'vendor'
       },
       runtimeChunk: {
         name: 'runtime'
@@ -145,4 +144,4 @@ if (isDEV) {
   })
 }
 
-module.exports = config;
+module.exports = config

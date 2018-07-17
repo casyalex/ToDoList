@@ -17,34 +17,34 @@
 
 <script>
 export default {
-    props: {
-        filter: {
-            type: String,
-            required: true
-        },
-        todos: {
-            type: Array,
-            required: true
-        }
+  props: {
+    filter: {
+      type: String,
+      required: true
     },
-    data() {
-        return {
-            state: ['all','active','completed']
-        }
-    },
-    methods: {
-        toggleFilter (state) {
-            this.$emit('toggle', state)
-        },
-        clearAllCompleted () {
-            this.$emit('clearAllCompleted')
-        }
-    },
-    computed: {
-        unFinishedTodoLength () {
-            return this.todos.filter(todo => !todo.completed).length
-        }
+    todos: {
+      type: Array,
+      required: true
     }
+  },
+  data () {
+    return {
+      state: ['all', 'active', 'completed']
+    }
+  },
+  methods: {
+    toggleFilter (state) {
+      this.$emit('toggle', state)
+    },
+    clearAllCompleted () {
+      this.$emit('clearAllCompleted')
+    }
+  },
+  computed: {
+    unFinishedTodoLength () {
+      return this.todos.filter(todo => !todo.completed).length
+    }
+  }
 }
 </script>
 

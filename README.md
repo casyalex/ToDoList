@@ -109,3 +109,22 @@ npm install -D lint-staged
 ```
 
 收工~这样只要你 add 的js或者jsx（具体看你的规则），提交都会自动lint修正好
+
+### 史诗巨坑3：
+引入vue的时候 如果碰到如下错误：
+
+```javascript
+[Vue warn]: You are using the runtime-only build of Vue where the template compiler is not available. Either pre-compile the templates into render functions, or use the compiler-included build.
+
+(found in <Root>)
+```
+
+那就是引入的是vue runtime only的版本，在resolve下设置alias别名vue，指向vue.esm.js即可
+
+```javascript
+resolve: {
+    alias: {
+      'vue': path.join(__dirname,'../node_modules/vue/dist/vue.esm.js')
+    }
+  },
+```

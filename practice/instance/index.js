@@ -72,5 +72,5 @@ setInterval(() => {
 //   app.$emit('test', 1, 2)
 // }, 1000)
 
-app.$forceUpdate()
+// app.$forceUpdate()
 // app.$nextTick()

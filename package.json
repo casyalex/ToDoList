@@ -9,8 +9,8 @@
     "build": "npm run clean && npm run build:client",
     "practice":"cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.practice.js",
     "clean": "rimraf dist",
-    "lint": "eslint --ext .js --ext .jsx --ext .vue client/ build/",
-    "lint-fix": "eslint --fix --ext .js --ext .jsx --ext .vue client/ build/",
+    "lint": "eslint --ext .js --ext .jsx --ext .vue client/ build/ practice/",
+    "lint-fix": "eslint --fix --ext .js --ext .jsx --ext .vue client/ build/ practice/",
     "precommit": "lint-staged",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js"
   },

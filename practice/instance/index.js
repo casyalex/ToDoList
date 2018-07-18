@@ -73,4 +73,4 @@ setInterval(() => {
 // }, 1000)
 
 // app.$forceUpdate()
-// app.$nextTick()
+app.$nextTick()

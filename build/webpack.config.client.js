@@ -25,6 +25,9 @@ const devServer = {
   overlay: {
     error: true
   },
+  historyApiFallback: {
+    index: '/public/index.html'
+  },
   hot: true
 }
 

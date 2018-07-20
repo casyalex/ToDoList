@@ -3,6 +3,10 @@ import Login from '../views/login/login.vue'
 
 export default [
   {
+    path: '/',
+    redirect: '/app'
+  },
+  {
     path: '/app',
     component: Todo
   },
@@ -10,4 +14,8 @@ export default [
     path: '/login',
     component: Login
   }
+  // {
+  //   path: '/login/exact',
+  //   component: Login
+  // }
 ]

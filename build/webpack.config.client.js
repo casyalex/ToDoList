@@ -10,7 +10,9 @@ const isDEV = process.env.NODE_ENV === 'development'
 
 const defalutPlugins = [
   new VueLoaderPlugin(),
-  new HtmlPlugin(),
+  new HtmlPlugin({
+    template: path.join(__dirname, 'template.html')
+  }),
   new webpack.DefinePlugin({
     'process.env': {
       NODE_ENV: isDEV ? '"development"' : '"production"'

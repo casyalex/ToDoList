@@ -18,7 +18,7 @@
 
 <script>
 import {
-  mapState, mapGetters
+  mapState, mapGetters, mapActions, mapMutations
   // mapGetters
 } from 'vuex'
 import Header from './views/layout/header.vue'
@@ -34,9 +34,29 @@ export default {
   mounted () {
     console.log(this.$store)
     let i = 1
+    // this.$store.dispatch('updateCountAsync', {
+    //   num: 5,
+    //   time: 2000
+    // })
+    // this.$store.state.count = 3
+
+    // setInterval(() => {
+    //   this.$store.commit('updateCount', i++)
+    // }, 1000)
+    this.updateCountAsync({
+      num: 5,
+      time: 2000
+    })
+
     setInterval(() => {
-      this.$store.commit('updateCount', i++)
+      this.updateCount(
+        i++
+      )
     }, 1000)
+  },
+  methods: {
+    ...mapActions(['updateCountAsync']),
+    ...mapMutations(['updateCount'])
   },
   computed: {
     ...mapState({

@@ -1,13 +1,17 @@
 import Vue from 'vue'
-import App from './app.vue'
 import VueRouter from 'vue-router'
+import Vuex from 'vuex'
+import App from './app.vue'
 
 import './assets/styles/global.styl'
-import creatRouter from './config/router'
+import createRouter from './config/router'
+import createStore from './store/store.js'
 
 Vue.use(VueRouter)
+Vue.use(Vuex)
 
-const router = creatRouter()
+const router = createRouter()
+const store = createStore()
 
 router.beforeEach((to, from, next) => {
   console.log('before each invoked')
@@ -30,5 +34,6 @@ router.afterEach((to, from) => {
 
 new Vue({
   router,
+  store,
   render: (h) => h(App)
 }).$mount('#root')

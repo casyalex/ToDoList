@@ -1,6 +1,7 @@
 <template>
     <div id="app">
         <Header></Header>
+        <p>{{count}}</p>
         <!-- <todo></todo> -->
         <router-link to="/app/123">app123</router-link>
         <router-link to="/app/456">app456</router-link>
@@ -20,11 +21,23 @@ import Header from './views/layout/header.vue'
 import Footer from './views/layout/footer.jsx'
 // import Todo from './views/todo/todo.vue'
 
-export default{
+export default {
   components: {
     Header,
     Footer
     // Todo
+  },
+  mounted () {
+    console.log(this.$store)
+    let i = 1
+    setInterval(() => {
+      this.$store.commit('updateCount', i++)
+    }, 1000)
+  },
+  computed: {
+    count () {
+      return this.$store.state.count
+    }
   }
 }
 </script>

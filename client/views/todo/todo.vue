@@ -1,7 +1,7 @@
 <template>
     <section class="real-app">
-        <input 
-            type="text" 
+        <input
+            type="text"
             class="add-input"
             autofocus="autofocus"
             placeholder="接下来要做什么"
@@ -19,6 +19,7 @@
          @toggle="toggleFilter"
          @clearAllCompleted="clearAllCompleted"
         />
+        <!-- <router-view></router-view> -->
     </section>
 </template>
 
@@ -27,6 +28,7 @@ import Item from './item.vue'
 import Tabs from './tabs.vue'
 let id = 0
 export default {
+  props: ['id'],
   data () {
     return {
       todos: [],
@@ -36,6 +38,10 @@ export default {
   components: {
     Item,
     Tabs
+  },
+  mounted () {
+    // console.log(this.$route) // 尽量不用$route，让组件解耦
+    // console.log(this.id)
   },
   computed: {
     filteredTodos () {

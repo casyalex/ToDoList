@@ -28,6 +28,22 @@ import Item from './item.vue'
 import Tabs from './tabs.vue'
 let id = 0
 export default {
+  beforeRouteEnter (to, from, next) {
+    console.log('todo before enter')
+    next(vm => {
+      console.log('after enter this.id is', vm.id)
+    })
+  },
+  beforeRouteUpdate (to, from, next) {
+    console.log('todo Update')
+    next()
+  },
+  beforeRouteLeave (to, from, next) {
+    console.log('todo before Leave')
+    if (global.confirm('are you sure?')) {
+      next()
+    }
+  },
   props: ['id'],
   data () {
     return {
@@ -40,7 +56,7 @@ export default {
     Tabs
   },
   mounted () {
-    // console.log(this.$route) // 尽量不用$route，让组件解耦
+    // console.log(this.$route) // 尽量不用$route，让组件解耦，不依赖vue-router也能复用
     // console.log(this.id)
   },
   computed: {

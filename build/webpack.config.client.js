@@ -5,6 +5,7 @@ const merge = require('webpack-merge')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const ExtractPlugin = require('extract-text-webpack-plugin')
 const baseConfig = require('./webpack.config.base')
+const VueClientPlugin = require('vue-server-renderer/client-plugin')
 
 const isDEV = process.env.NODE_ENV === 'development'
 
@@ -17,7 +18,9 @@ const defalutPlugins = [
     'process.env': {
       NODE_ENV: isDEV ? '"development"' : '"production"'
     }
-  })]
+  }),
+  new VueClientPlugin()
+]
 
 const devServer = {
   port: 8000,

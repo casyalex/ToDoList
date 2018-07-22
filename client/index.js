@@ -19,6 +19,22 @@ store.registerModule('c', { // 异步加载模块
   }
 })
 
+// store.subscribe((mutation, state) => {
+//   console.log(mutation.type)
+//   console.log(mutation.payload)
+// })
+
+store.subscribeAction((action, state) => {
+  console.log(action.type)
+  console.log(action.payload)
+})
+
+// store.watch((state) => state.count + 1, (newCount) => {
+//   console.log('new count watched:', newCount)
+// })
+
+// store.unregisterModule('c') // 解绑
+
 router.beforeEach((to, from, next) => {
   console.log('before each invoked')
   next()

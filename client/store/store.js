@@ -14,6 +14,11 @@ export default () => {
     mutations,
     getters,
     actions,
+    // plugins: [
+    //   (store) => {
+    //     console.log('my plugin invoked')
+    //   }
+    // ],
     modules: {
       a: {
         namespaced: true, // 控制module作用域，mutation不是全局

@@ -35,10 +35,10 @@ export default {
   mounted () {
     console.log(this.$store)
     // let i = 1
-    // this.$store.dispatch('updateCountAsync', {
-    //   num: 5,
-    //   time: 2000
-    // })
+    this.$store.dispatch('updateCountAsync', {
+      num: 5,
+      time: 2000
+    })
     // this.$store.state.count = 3
 
     // setInterval(() => {
@@ -48,9 +48,9 @@ export default {
     //   num: 5,
     //   time: 2000
     // })
-    this['a/updateText']('123')
-    this['a/add']()
-    this.textAction()
+    // this['a/updateText']('123')
+    // this['a/add']()
+    // this.textAction()
     // setInterval(() => {
     //   this.updateCount(
     //     i++

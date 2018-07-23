@@ -3,7 +3,7 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const baseConfig = require('./webpack.config.base')
-const ExtractPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const VueServerPlugin = require('vue-server-renderer/server-plugin')
 
 let config
@@ -23,9 +23,9 @@ config = merge(baseConfig, {
       test: /\.styl/,
       oneOf: [{
         resourceQuery: /module/,
-        use: ExtractPlugin.extract({
-          fallback: 'vue-style-loader',
-          use: [{
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
             loader: 'css-loader',
             options: {
               modules: true,
@@ -40,30 +40,29 @@ config = merge(baseConfig, {
             }
           },
           'stylus-loader'
-          ]
-        })
+        ]
       },
       {
-        use: ExtractPlugin.extract({
-          fallback: 'vue-style-loader',
-          use: [
-            'css-loader',
-            {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: true
-              }
-            },
-            'stylus-loader'
-          ]
-        })
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          'stylus-loader'
+        ]
       }
       ]
     }]
   },
   plugins: [
     new VueLoaderPlugin(),
-    new ExtractPlugin('style.[hash:8].css'),
+    new MiniCssExtractPlugin({
+      filename: 'style.[hash:8].css'
+    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'develoment'),
       'process.env.VUE_ENV': 'server'

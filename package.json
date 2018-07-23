@@ -13,7 +13,8 @@
     "lint-fix": "eslint --fix --ext .js --ext .jsx --ext .vue client/ build/ practice/",
     "precommit": "lint-staged",
     "dev:client": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js",
-    "dev:server": "cross-env NODE_ENV=development node server/server.js"
+    "dev:server": "nodemon server/server.js",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\""
   },
   "lint-staged": {
     "{build,client}/**/*.{js,jsx}": [
@@ -36,6 +37,7 @@
     "ejs": "^2.6.1",
     "koa": "^2.5.2",
     "koa-router": "^7.4.0",
+    "koa-send": "^5.0.0",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
     "vue-server-renderer": "^2.5.16",
@@ -52,6 +54,7 @@
     "babel-plugin-transform-vue-jsx": "^3.7.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-1": "^6.24.1",
+    "concurrently": "^3.6.0",
     "cross-env": "^5.2.0",
     "css-loader": "^1.0.0",
     "eslint": "^5.1.0",
@@ -68,6 +71,7 @@
     "husky": "^0.14.3",
     "lint-staged": "^7.2.0",
     "memory-fs": "^0.4.1",
+    "nodemon": "^1.18.3",
     "postcss-loader": "^2.1.6",
     "rimraf": "^2.6.2",
     "style-loader": "^0.21.0",

@@ -2,10 +2,9 @@
     <div id="app">
         <Header></Header>
         <p>{{fullName}} {{counter.num}}</p>
-        <p>{{textC}} {{textPlus}}</p>
+        <p>{{textPlus}}</p>
         <!-- <todo></todo> -->
-        <router-link to="/app/123">app123</router-link>
-        <router-link to="/app/456">app456</router-link>
+        <router-link to="/app">app123</router-link>
         <router-link to="/login">login</router-link>
         <!-- <router-link to="/login/exact">login-exact</router-link> -->
         <transition name="fade">
@@ -70,8 +69,8 @@ export default {
     },
     ...mapState({
       counter: (state) => state.count,
-      textA: state => state.a.textc,
-      textC: state => state.c.text
+      textA: state => state.a.textc
+      // textC: state => state.c.text
     }),
     // count () {
     //   return this.$store.state.count

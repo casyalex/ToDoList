@@ -13,11 +13,11 @@ Vue.use(Vuex)
 const router = createRouter()
 const store = createStore()
 
-store.registerModule('c', { // 异步加载模块
-  state: {
-    text: 'c'
-  }
-})
+// store.registerModule('c', { // 异步加载模块
+//   state: {
+//     text: 'c'
+//   }
+// })
 
 // store.subscribe((mutation, state) => {
 //   console.log(mutation.type)

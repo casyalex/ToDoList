@@ -10,11 +10,11 @@ let config
 
 config = merge(baseConfig, {
   target: 'node', // ssr跑在node环境
-  entry: path.join(__dirname, '../client/sever-entry.js'),
+  entry: path.join(__dirname, '../client/server-entry.js'),
   devtool: '#source-map',
   output: {
     libraryTarget: 'commonjs2', // 指定引用出去形式，module exports
-    filename: 'sever-entry.js',
+    filename: 'server-entry.js',
     path: path.join(__dirname, '../server-build')
   },
   externals: Object.keys(require('../package.json').dependencies),

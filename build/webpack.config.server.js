@@ -25,9 +25,8 @@ config = merge(baseConfig, {
         use: [
           'vue-style-loader',
           {
-            loader: 'css-loader/locals',
+            loader: 'css-loader',
             options: {
-              importLoaders: 1,
               modules: true,
               localIdentName: '[name]--[local]--[hash:base64:5]',
               camelCase: true
@@ -45,7 +44,7 @@ config = merge(baseConfig, {
       {
         use: [
           'vue-style-loader',
-          'css-loader/locals',
+          'css-loader',
           {
             loader: 'postcss-loader',
             options: {

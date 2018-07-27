@@ -3,7 +3,6 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const baseConfig = require('./webpack.config.base')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const VueServerPlugin = require('vue-server-renderer/server-plugin')
 
 let config
@@ -24,12 +23,13 @@ config = merge(baseConfig, {
       oneOf: [{
         resourceQuery: /module/,
         use: [
-          MiniCssExtractPlugin.loader,
+          'vue-style-loader',
           {
-            loader: 'css-loader',
+            loader: 'css-loader/locals',
             options: {
+              importLoaders: 1,
               modules: true,
-              localIdentName: '[hash:base64:5]',
+              localIdentName: '[name]--[local]--[hash:base64:5]',
               camelCase: true
             }
           },
@@ -44,8 +44,8 @@ config = merge(baseConfig, {
       },
       {
         use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
+          'vue-style-loader',
+          'css-loader/locals',
           {
             loader: 'postcss-loader',
             options: {
@@ -60,9 +60,6 @@ config = merge(baseConfig, {
   },
   plugins: [
     new VueLoaderPlugin(),
-    new MiniCssExtractPlugin({
-      filename: 'style.[hash:8].css'
-    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'develoment'),
       'process.env.VUE_ENV': 'server'

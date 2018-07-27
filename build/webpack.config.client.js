@@ -88,7 +88,7 @@ if (isDEV) {
 } else {
   config = merge(baseConfig, {
     entry: {
-      app: path.join(__dirname, '../client/index.js')
+      app: path.join(__dirname, '../client/client-entry.js')
     },
     output: {
       filename: '[name].[chunkhash:8].js'

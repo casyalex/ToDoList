@@ -27,7 +27,11 @@
 import Item from './item.vue'
 import Tabs from './tabs.vue'
 let id = 0
+
 export default {
+  metaInfo: {
+    title: 'The Todo App'
+  },
   props: ['id'],
   data () {
     return {

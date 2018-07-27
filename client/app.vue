@@ -26,6 +26,9 @@ import Footer from './views/layout/footer.jsx'
 // import Todo from './views/todo/todo.vue'
 
 export default {
+  metaInfo: {
+    title: 'Ruanbao\'s Todo App'
+  },
   components: {
     Header,
     Footer

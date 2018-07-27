@@ -130,3 +130,60 @@ resolve: {
     }
   },
 ```
+
+### 史诗巨坑4：
+关于在Vue的服务器渲染SSR需要单独抽取提取CSS，由于extract-text-webpack-plugin在webpack4已经停更，beta版在服务端渲染有问题，报call is not defined。
+而这个作者推荐的mini-css-extract-plugin在SSR上也是不能用的，原因在于这个插件会用document方法，往模板插入<link>标签。服务器渲染跑的是node.js环境里没有document这个方法，就会报错：document is not defined。
+
+github issue上建议：
+
+1. 放弃这个插件，改用css-loader/locale 或者 extract-loader等其它插件。（未尝试，应该是推荐根治的方法）
+
+2. 屏蔽这个报错，用扩展mini-css-extract-plugin的方式。（尝试过，至少我未凑效）
+
+屏蔽方法代码示例：
+
+```javascript
+class ServerMiniCssExtractPlugin extends MiniCssExtractPlugin {
+  getCssChunkObject(mainChunk) {
+    return {};
+  }
+}
+```
+
+webpack rule的配置：
+```javascript
+{
+  test: /\.css$/,
+  use: [
+    {
+      loader: ServerMiniCssExtractPlugin.loader
+    },
+    {
+      loader: 'css-loader',
+      options: {
+        importLoaders: 1,
+        modules: true,
+        localIdentName: '[name]__[local]--[hash:base64:5]',
+        sourceMap: true
+      }
+    },
+    {
+      loader: 'postcss-loader',
+      options: {
+        plugins: () => [
+          require('postcss-flexbugs-fixes'),
+          require('autoprefixer')({
+            flexbox: 'no-2009',
+            grid: true
+          })
+        ]
+      }
+    }
+  ]
+}
+```
+
+3. 别抽取CSS了，又不是不能用。（我目前的处理办法）
+
+[关于这个天坑的github issue地址](https://github.com/webpack-contrib/mini-css-extract-plugin/issues/90)

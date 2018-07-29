@@ -137,9 +137,9 @@ resolve: {
 
 github issue上建议：
 
-1. 放弃这个插件，改用css-loader/locals 或者 extract-loader等其它插件。（未尝试，应该是推荐根治的方法）
+1. ~~放弃这个插件，改用css-loader/locals 或者 extract-loader等其它插件。~~（未尝试，应该是推荐根治的方法。找对了方向，但不全对）
 
-2. 屏蔽这个报错，用扩展mini-css-extract-plugin的方式。（尝试过，至少我未凑效）
+2. ~~屏蔽这个报错，用扩展mini-css-extract-plugin的方式。~~（尝试过，至少我未凑效。治标不治本）
 
 屏蔽方法代码示例：
 
@@ -184,7 +184,7 @@ webpack rule的配置：
 }
 ```
 
-3. 别抽取CSS了，又不是不能用。（我目前的处理办法,经过测试这是不行的）
+3. ~~别抽取CSS了，又不是不能用。~~（曾经想混过去,但是经过测试这是不行的）
 
 4. 调了两天终于成功，正确方法是：client端正常使用mini-css-extract-plugin，server端使用css-loader/locals。就那么简单。
 

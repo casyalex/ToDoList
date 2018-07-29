@@ -23,11 +23,8 @@ config = merge(baseConfig, {
       oneOf: [{
         resourceQuery: /module/,
         use: [
-          'file-loader',
-          'extract-loader',
-          'vue-style-loader',
           {
-            loader: 'css-loader',
+            loader: 'css-loader/locals',
             options: {
               modules: true,
               localIdentName: '[name]--[local]--[hash:base64:5]',
@@ -45,10 +42,7 @@ config = merge(baseConfig, {
       },
       {
         use: [
-          'file-loader',
-          'extract-loader',
-          'vue-style-loader',
-          'css-loader',
+          'css-loader/locals',
           {
             loader: 'postcss-loader',
             options: {

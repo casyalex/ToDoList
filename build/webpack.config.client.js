@@ -3,7 +3,8 @@ const webpack = require('webpack')
 const HtmlPlugin = require('html-webpack-plugin')
 const merge = require('webpack-merge')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const ExtractPlugin = require('extract-text-webpack-plugin')
+// const ExtractPlugin = require('extract-text-webpack-plugin')
+const ExtractPlugin = require('mini-css-extract-plugin')
 const baseConfig = require('./webpack.config.base')
 const VueClientPlugin = require('vue-server-renderer/client-plugin')
 
@@ -101,13 +102,13 @@ if (isDEV) {
           oneOf: [
             {
               resourceQuery: /module/,
-              use: ExtractPlugin.extract({
-                fallback: 'vue-style-loader',
-                use: [{
+              use: [
+                ExtractPlugin.loader,
+                {
                   loader: 'css-loader',
                   options: {
                     modules: true,
-                    localIdentName: '[hash:base64:5]',
+                    localIdentName: '[name]--[local]--[hash:base64:5]',
                     camelCase: true
                   }
                 },
@@ -118,12 +119,11 @@ if (isDEV) {
                   }
                 },
                 'stylus-loader'
-                ]
-              })
+              ]
             },
-            {use: ExtractPlugin.extract({
-              fallback: 'vue-style-loader',
+            {
               use: [
+                ExtractPlugin.loader,
                 'css-loader',
                 {
                   loader: 'postcss-loader',
@@ -133,7 +133,7 @@ if (isDEV) {
                 },
                 'stylus-loader'
               ]
-            })}
+            }
           ]
         }
       ]
@@ -144,7 +144,14 @@ if (isDEV) {
       },
       runtimeChunk: true
     },
-    plugins: defalutPlugins.concat([new ExtractPlugin('style.[hash:8].css')])
+    plugins: defalutPlugins.concat([new ExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: '[name].[hash].css',
+      chunkFilename: '[id].[hash].css'
+    })
+    ])
+    // plugins: defalutPlugins
   })
 }
 

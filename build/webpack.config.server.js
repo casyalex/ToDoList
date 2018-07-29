@@ -23,6 +23,8 @@ config = merge(baseConfig, {
       oneOf: [{
         resourceQuery: /module/,
         use: [
+          'file-loader',
+          'extract-loader',
           'vue-style-loader',
           {
             loader: 'css-loader',
@@ -43,6 +45,8 @@ config = merge(baseConfig, {
       },
       {
         use: [
+          'file-loader',
+          'extract-loader',
           'vue-style-loader',
           'css-loader',
           {

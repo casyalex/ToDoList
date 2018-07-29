@@ -137,7 +137,7 @@ resolve: {
 
 github issue上建议：
 
-1. 放弃这个插件，改用css-loader/locale 或者 extract-loader等其它插件。（未尝试，应该是推荐根治的方法）
+1. 放弃这个插件，改用css-loader/locals 或者 extract-loader等其它插件。（未尝试，应该是推荐根治的方法）
 
 2. 屏蔽这个报错，用扩展mini-css-extract-plugin的方式。（尝试过，至少我未凑效）
 
@@ -184,6 +184,47 @@ webpack rule的配置：
 }
 ```
 
-3. 别抽取CSS了，又不是不能用。（我目前的处理办法）
+3. 别抽取CSS了，又不是不能用。（我目前的处理办法,经过测试这是不行的）
+
+4. 调了两天终于成功，正确方法是：client端正常使用mini-css-extract-plugin，server端使用css-loader/locals。就那么简单。
+
+```js
+rules: [{
+  test: /\.styl/,
+  oneOf: [{
+    resourceQuery: /module/,
+    use: [
+      {
+        loader: 'css-loader/locals',
+        options: {
+          modules: true,
+          localIdentName: '[name]--[local]--[hash:base64:5]',
+          camelCase: true
+        }
+      },
+      {
+        loader: 'postcss-loader',
+        options: {
+          sourceMap: true
+        }
+      },
+      'stylus-loader'
+    ]
+  },
+  {
+    use: [
+      'css-loader/locals',
+      {
+        loader: 'postcss-loader',
+        options: {
+          sourceMap: true
+        }
+      },
+      'stylus-loader'
+    ]
+  }
+  ]
+}]
+```
 
 [关于这个天坑的github issue地址](https://github.com/webpack-contrib/mini-css-extract-plugin/issues/90)

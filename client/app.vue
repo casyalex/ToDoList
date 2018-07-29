@@ -4,12 +4,13 @@
         <p>{{fullName}} {{counter.num}}</p>
         <p>{{textPlus}}</p>
         <!-- <todo></todo> -->
-        <router-link to="/app">app123</router-link>
-        <router-link to="/login">login</router-link>
+        <!-- <router-link to="/app">app123</router-link>
+        <router-link to="/login">login</router-link> -->
         <!-- <router-link to="/login/exact">login-exact</router-link> -->
         <transition name="fade">
           <router-view />
         </transition>
+        <notification content="test notify"/>
         <Footer></Footer>
         <div id="cover"></div>
         <!-- <router-view name="a"/> -->

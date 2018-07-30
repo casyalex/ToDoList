@@ -1,5 +1,12 @@
 <template>
     <section class="real-app">
+        <div class="tab-container">
+          <tabs value="1">
+            <tab label="tab1" index="1"></tab>
+            <tab label="tab2" index="2"><span slot="label" style="color: red">tab2</span></tab>
+            <tab label="tab3" index="3"></tab>
+          </tabs>
+        </div>
         <input
             type="text"
             class="add-input"
@@ -25,7 +32,7 @@
 
 <script>
 import Item from './item.vue'
-import Tabs from './tabs.vue'
+import Helper from './tabs.vue'
 let id = 0
 
 export default {
@@ -41,7 +48,7 @@ export default {
   },
   components: {
     Item,
-    Tabs
+    Helper
   },
   mounted () {
     // console.log(this.$route) // 尽量不用$route，让组件解耦，不依赖vue-router也能复用
@@ -79,29 +86,32 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-    .real-app{
-        display block
-        width 800px
-        margin 0px  auto
-        box-shadow 0px 0px 5px #666
-    }
-    .add-input{
-        position relative
-        margin 0px
-        width 100%
-        font-size 24px
-        font-family inherit
-        font-weight inherit
-        line-height 1.4rem
-        border 0
-        outline none
-        color inherit
-        padding 6px
-        border 1px solid #999
-        box-shadow: inset 0 -1px 5px 0px rgba(0,0,0,0)
-        box-sizing border-box
-        font-smoothing:antialiased;
-        padding 16px 16px 16px 60px
-        border none
-    }
+.real-app{
+    display block
+    width 800px
+    margin 0px  auto
+    box-shadow 0px 0px 5px #666
+}
+.add-input{
+    position relative
+    margin 0px
+    width 100%
+    font-size 24px
+    font-family inherit
+    font-weight inherit
+    line-height 1.4rem
+    border 0
+    outline none
+    color inherit
+    padding 6px
+    border 1px solid #999
+    box-shadow: inset 0 -1px 5px 0px rgba(0,0,0,0)
+    box-sizing border-box
+    font-smoothing:antialiased;
+    padding 16px 16px 16px 60px
+    border none
+}
+.tab-container
+  background #ffffff
+  padding 0 15px
 </style>

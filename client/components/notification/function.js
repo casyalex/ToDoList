@@ -8,10 +8,17 @@ let seed = 1
 
 const removeInstance = (instance) => {
   if (!instance) return
-  // const len = instances.length
+  const len = instances.length
   const index = instances.findIndex(inst => instance.id === inst.id)
 
-  instance.splice(index, 1)
+  instances.splice(index, 1)
+
+  if (len <= 1) return
+  const removeHeight = instance.vm.height
+  for (let i = index; i < len - 1; i++) {
+    instances[i].verticalOffset =
+      parseInt(instances[i].verticalOffset) - removeHeight - 16
+  }
 }
 
 const notify = (options) => {
@@ -27,7 +34,7 @@ const notify = (options) => {
       ...rest
     },
     data: {
-      autoClose: autoClose === undefined ? 1500 : autoClose
+      autoClose: autoClose === undefined ? 3000 : autoClose
     }
   })
 
@@ -35,6 +42,7 @@ const notify = (options) => {
   instance.id = id
   instance.vm = instance.$mount()
   document.body.appendChild(instance.vm.$el)
+  instance.vm.visible = true
 
   let verticalOffset = 0
   instances.forEach(item => {
@@ -44,7 +52,7 @@ const notify = (options) => {
   instance.verticalOffset = verticalOffset
   instances.push(instance)
   instance.vm.$on('closed', () => {
-    removeInstance(instances)
+    removeInstance(instance)
     document.body.removeChild(instance.vm.$el)
     instance.vm.$destroy()
   })

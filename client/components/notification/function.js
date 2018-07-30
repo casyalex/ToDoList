@@ -6,6 +6,14 @@ const NotificationConstructor = Vue.extend(Component)
 const instances = []
 let seed = 1
 
+const removeInstance = (instance) => {
+  if (!instance) return
+  // const len = instances.length
+  const index = instances.findIndex(inst => instance.id === inst.id)
+
+  instance.splice(index, 1)
+}
+
 const notify = (options) => {
   if (Vue.prototype.$isServer) return
 
@@ -35,6 +43,14 @@ const notify = (options) => {
   verticalOffset += 16
   instance.verticalOffset = verticalOffset
   instances.push(instance)
+  instance.vm.$on('closed', () => {
+    removeInstance(instances)
+    document.body.removeChild(instance.vm.$el)
+    instance.vm.$destroy()
+  })
+  instance.vm.$on('close', () => {
+    instance.vm.visible = false
+  })
   return instance.vm
 }
 

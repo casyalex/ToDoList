@@ -1,5 +1,6 @@
 <template>
     <div id="app">
+        <div id="cover"></div>
         <Header></Header>
         <p>{{fullName}} {{counter.num}}</p>
         <p>{{textPlus}}</p>
@@ -10,9 +11,9 @@
         <transition name="fade">
           <router-view />
         </transition>
-        <notification content="test notify"/>
+        <!-- <notification content="test notify"/> -->
         <Footer></Footer>
-        <div id="cover"></div>
+        <button @click="notify">clickme1</button>
         <!-- <router-view name="a"/> -->
     </div>
 </template>
@@ -36,12 +37,16 @@ export default {
     // Todo
   },
   mounted () {
-    console.log(this.$store)
-    // let i = 1
-    this.$store.dispatch('updateCountAsync', {
-      num: 5,
-      time: 2000
+    this.$notify({
+      content: 'test $notify',
+      btn: 'close'
     })
+    // console.log(this.$store)
+    // let i = 1
+    // this.$store.dispatch('updateCountAsync', {
+    //   num: 5,
+    //   time: 2000
+    // })
     // this.$store.state.count = 3
 
     // setInterval(() => {
@@ -62,7 +67,13 @@ export default {
   },
   methods: {
     ...mapActions(['updateCountAsync', 'a/add', 'textAction']),
-    ...mapMutations(['updateCount', 'a/updateText'])
+    ...mapMutations(['updateCount', 'a/updateText']),
+    notify () {
+      this.$notify({
+        content: 'test notify',
+        btn: 'close'
+      })
+    }
   },
   computed: {
     // textA () {

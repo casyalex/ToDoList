@@ -2,15 +2,23 @@
     <section class="real-app">
         <div class="tab-container">
           <tabs :value="tabValue" @change="handleChangeTab">
-            <tab label="tab1" index="1"></tab>
-            <tab label="tab2" index="2"><span slot="label" style="color: red">tab2</span></tab>
-            <tab label="tab3" index="3"></tab>
+            <tab label="tab1" index="1">
+              <span>tab content 1{{inputContent}}</span>
+            </tab>
+            <tab label="tab2" index="2">
+              <span slot="label" style="color: red">tab2</span>
+              <span>tab content 2</span>
+            </tab>
+            <tab label="tab3" index="3">
+              <span>tab content 3</span>
+            </tab>
           </tabs>
         </div>
         <input
             type="text"
             class="add-input"
             autofocus="autofocus"
+            v-model="inputContent"
             placeholder="接下来要做什么"
             @keyup.enter="addTodo"
         >
@@ -44,7 +52,8 @@ export default {
     return {
       todos: [],
       filter: 'all',
-      tabValue: '1'
+      tabValue: '1',
+      inputContent: ''
     }
   },
   components: {

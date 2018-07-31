@@ -234,3 +234,9 @@ rules: [{
 6-6 tabs组件之在父组件中渲染子组件的slot
 
 课程中的往 插槽组件 以props方式 传绑定数据的方法失效，原因未明。先放一边。
+
+### 史诗巨坑6：
+
+调试api用的chrome插件 restlet client
+
+免费的app应用平台 apicloud

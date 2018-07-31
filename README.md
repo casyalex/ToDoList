@@ -228,3 +228,9 @@ rules: [{
 ```
 
 [关于这个天坑的github issue地址](https://github.com/webpack-contrib/mini-css-extract-plugin/issues/90)
+
+### 史诗巨坑5：
+
+6-6 tabs组件之在父组件中渲染子组件的slot
+
+课程中的往 插槽组件 以props方式 传绑定数据的方法失效，原因未明。先放一边。

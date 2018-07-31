@@ -2,7 +2,7 @@
   export default {
     name: 'Tabs',
     props: {
-      valule: {
+      value: {
         type: [String, Number],
         required: true
       }
@@ -15,6 +15,11 @@
           </ul>
         </div>
       )
+    },
+    methods: {
+      onChange (index) {
+        this.$emit('change', index)
+      }
     }
   }
 </script>

@@ -13,7 +13,7 @@
     },
     computed: {
       active () {
-        return false
+        return this.$parent.value === this.index
       }
     },
     render () {
@@ -23,10 +23,15 @@
         active: this.active
       }
       return (
-        <li class={classNames}>
+        <li class={classNames} on-click={this.handleClick}>
           {tab}
         </li>
       )
+    },
+    methods: {
+      handleClick () {
+        this.$parent.onChange(this.index)
+      }
     }
   }
 </script>

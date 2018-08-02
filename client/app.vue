@@ -8,22 +8,22 @@
         <!-- <router-link to="/app">app123</router-link>
         <router-link to="/login">login</router-link> -->
         <!-- <router-link to="/login/exact">login-exact</router-link> -->
-        
+
         <transition name="fade">
           <router-view />
         </transition>
         <!-- <notification content="test notify"/> -->
         <Footer></Footer>
-        <button @click="notify">clickme1</button>
+        <!-- <button @click="notify">clickme1</button> -->
         <!-- <router-view name="a"/> -->
     </div>
 </template>
 
 <script>
-import {
-  mapState, mapGetters, mapActions, mapMutations
-  // mapGetters
-} from 'vuex'
+// import {
+//   mapState, mapGetters, mapActions, mapMutations
+//   // mapGetters
+// } from 'vuex'
 import Header from './views/layout/header.vue'
 import Footer from './views/layout/footer.jsx'
 // import Todo from './views/todo/todo.vue'
@@ -67,8 +67,8 @@ export default {
     // }, 1000)
   },
   methods: {
-    ...mapActions(['updateCountAsync', 'a/add', 'textAction']),
-    ...mapMutations(['updateCount', 'a/updateText']),
+    // ...mapActions(['updateCountAsync', 'a/add', 'textAction']),
+    // ...mapMutations(['updateCount', 'a/updateText']),
     notify () {
       this.$notify({
         content: 'test notify',
@@ -80,21 +80,21 @@ export default {
     // textA () {
     //   return this.$store.state.a.text
     // },
-    textB () {
-      return this.$store.state.b.text
-    },
-    ...mapState({
-      counter: (state) => state.count,
-      textA: state => state.a.textc
-      // textC: state => state.c.text
-    }),
-    // count () {
-    //   return this.$store.state.count
+    // textB () {
+    //   return this.$store.state.b.text
     // },
-    ...mapGetters({
-      fullName: 'fullName',
-      textPlus: 'a/textPlus'
-    })
+    // ...mapState({
+    //   counter: (state) => state.count,
+    //   textA: state => state.a.textc
+    //   // textC: state => state.c.text
+    // }),
+    // // count () {
+    // //   return this.$store.state.count
+    // // },
+    // ...mapGetters({
+    //   fullName: 'fullName',
+    //   textPlus: 'a/textPlus'
+    // })
   }
 }
 </script>

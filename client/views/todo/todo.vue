@@ -10,13 +10,14 @@
             class="add-input"
             autofocus="autofocus"
             placeholder="接下来要做什么"
-            @keyup.enter="addTodo"
+            @keyup.enter="handleAdd"
         >
         <item
             :todo="todo"
             v-for="todo in filteredTodos"
             :key="todo.id"
             @del="deleteTodo"
+            @toggle="toggleTodoState"
         />
         <Helper
          :filter="filter"
@@ -65,20 +66,38 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['fetchTodos']),
-    addTodo (e) {
-      this.todos.unshift({
-        // id: id++,
-        content: e.target.value.trim(),
+    ...mapActions([
+      'fetchTodos',
+      'addTodo',
+      'deleteTodo',
+      'updateTodo',
+      'deleteAllCompleted'
+    ]),
+    handleAdd (e) {
+      const content = e.target.value.trim()
+      if (!content) {
+        this.$notify({
+          content: '必须输入要做的内容'
+        })
+        return
+      }
+      const todo = {
+        content,
         completed: false
-      })
+      }
+      this.addTodo(todo)
       e.target.value = ''
     },
-    deleteTodo (id) {
-      this.todos.splice(this.todos.findIndex(todo => todo.id === id), 1)
-    },
     clearAllCompleted () {
-      this.todos = this.todos.filter(todo => !todo.completed)
+      this.deleteAllCompleted()
+    },
+    toggleTodoState (todo) {
+      this.updateTodo({
+        id: todo.id,
+        todo: Object.assign({}, todo, {
+          completed: !todo.completed
+        })
+      })
     },
     handleChangeTab (value) {
       this.filter = value

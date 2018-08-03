@@ -38,10 +38,10 @@ export default {
     // Todo
   },
   mounted () {
-    this.$notify({
-      content: 'test $notify',
-      btn: 'close'
-    })
+    // this.$notify({
+    //   content: 'test $notify',
+    //   btn: 'close'
+    // })
     // console.log(this.$store)
     // let i = 1
     // this.$store.dispatch('updateCountAsync', {

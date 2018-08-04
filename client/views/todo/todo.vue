@@ -55,6 +55,9 @@ export default {
     // console.log(this.id)
     this.fetchTodos()
   },
+  asyncData ({ store }) {
+    return store.dispatch('fetchTodos')
+  },
   computed: {
     ...mapState(['todos']),
     filteredTodos () {

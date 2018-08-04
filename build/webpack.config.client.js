@@ -89,7 +89,12 @@ if (isDEV) {
     devServer,
     plugins: defalutPlugins.concat([
       new webpack.HotModuleReplacementPlugin()
-    ])
+    ]),
+    resolve: {
+      alias: {
+        'model': path.join(__dirname, '../client/model/client-model.js')
+      }
+    }
   })
 } else {
   config = merge(baseConfig, {
@@ -158,6 +163,12 @@ if (isDEV) {
     ])
     // plugins: defalutPlugins
   })
+}
+
+config.resolve = {
+  alias: {
+    'model': path.join(__dirname, '../client/model/client-model.js')
+  }
 }
 
 module.exports = config

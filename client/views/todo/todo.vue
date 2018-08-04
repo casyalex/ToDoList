@@ -53,10 +53,15 @@ export default {
   mounted () {
     // console.log(this.$route) // 尽量不用$route，让组件解耦，不依赖vue-router也能复用
     // console.log(this.id)
-    this.fetchTodos()
+    if (!this.todos || this.todos.length === 0) {
+      this.fetchTodos()
+    }
   },
   asyncData ({ store }) {
-    return store.dispatch('fetchTodos')
+    if (store.state.user) {
+      return store.dispatch('fetchTodos')
+    }
+    return Promise.resolve()
   },
   computed: {
     ...mapState(['todos']),

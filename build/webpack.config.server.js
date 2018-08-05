@@ -3,7 +3,7 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const baseConfig = require('./webpack.config.base')
-const VueServerPlugin = require('vue-server-renderer/server-plugin')
+// const VueServerPlugin = require('vue-server-renderer/server-plugin')
 
 let config
 
@@ -60,8 +60,8 @@ config = merge(baseConfig, {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'develoment'),
       'process.env.VUE_ENV': 'server'
-    }),
-    new VueServerPlugin()
+    })
+    // new VueServerPlugin()
   ]
 
 })

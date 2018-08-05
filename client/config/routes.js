@@ -18,8 +18,7 @@ export default [
     // }),
     component: () => import('../views/todo/todo.vue'),
     // components: {
-    //   default: Todo,
-    //   a: Login
+    //   default: Todo
     // },
     name: 'app',
     meta: {
@@ -40,8 +39,8 @@ export default [
   {
     path: '/login',
     // components: {
-    //   default: Login,
-    //   a: Todo
+    //   default: Login
+    //   // a: Todo
     // }
     component: () => import('../views/login/login.vue')
   }

@@ -3,9 +3,23 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const baseConfig = require('./webpack.config.base')
-// const VueServerPlugin = require('vue-server-renderer/server-plugin')
+const VueServerPlugin = require('vue-server-renderer/server-plugin')
 
 let config
+
+const isDEV = process.env.NODE_ENV === 'development'
+
+const plugins = [
+  new VueLoaderPlugin(),
+  new webpack.DefinePlugin({
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'develoment'),
+    'process.env.VUE_ENV': 'server'
+  })
+]
+
+if (isDEV) {
+  plugins.push(new VueServerPlugin())
+}
 
 config = merge(baseConfig, {
   target: 'node', // ssr跑在node环境
@@ -55,15 +69,7 @@ config = merge(baseConfig, {
       ]
     }]
   },
-  plugins: [
-    new VueLoaderPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'develoment'),
-      'process.env.VUE_ENV': 'server'
-    })
-    // new VueServerPlugin()
-  ]
-
+  plugins
 })
 
 config.resolve = {

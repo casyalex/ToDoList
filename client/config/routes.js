@@ -16,7 +16,7 @@ export default [
     // props: (route) => ({ // 用函数传
     //   id: route.query.b
     // }),
-    component: () => import('../views/todo/todo.vue'),
+    component: () => import(/* webpackChunkName: "todo-view" */'../views/todo/todo.vue'),
     // components: {
     //   default: Todo
     // },
@@ -42,7 +42,7 @@ export default [
     //   default: Login
     //   // a: Todo
     // }
-    component: () => import('../views/login/login.vue')
+    component: () => import(/* webpackChunkName: "login-view" */'../views/login/login.vue')
   }
   // {
   //   path: '/login/exact',

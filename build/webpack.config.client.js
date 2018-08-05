@@ -159,7 +159,8 @@ if (isDEV) {
       // both options are optional
       filename: '[name].[hash:5].css',
       chunkFilename: '[name].[hash:5].css'
-    })
+    }),
+    new webpack.NamedChunksPlugin()
     ])
     // plugins: defalutPlugins
   })
